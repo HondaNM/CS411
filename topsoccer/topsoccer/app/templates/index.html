@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Top Soccer</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" href="{{ url_for('static', filename='img/football.ico') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/custom.css') }}">
+
+    </head>
+    <body>
+
+        <h1>TOP SOCCER</h1>
+        <p>Tell You What Happened in the Field of Soccer</p>
+
+    </body> 
+
+        <head>
+            <meta charset="utf-8" />
+            <title>SEARCH</title>
+            <link rel="stylesheet" href="js/chosen/chosen.css" />
+        </head>
+    <body>
+        <div>
+            <label for="search">What are you interested in?</label> 
+
+        </div>
+<!--how to let select here to control submit-->        
+        <select data-placeholder="Selectt Field" class="select-chosen">
+
+            <option value=""></option>
+            <option value="1">League</option>
+            <option value="2">Club</option>
+            <option value="3">Player</option>
+        </select>
+    </body>
+    
+    <form method="post">
+        <label>League Name:</label> <input type="text" name="LeagueName">
+        <input type="submit" value="search">
+      </form>
+      <form method="post">
+        <label>Club Name:</label> <input type="text" name="ClubName">
+        <input type="submit" value="search">
+      </form>
+      <form method="post">
+        <label>Player Name:</label> <input type="text" name="PlayerName">
+        <input type="submit" value="search">
+      </form>
+      <form method="post">
+        <label>Special Function:</label> <input type="text" name="SFunction">
+        <input type="submit" value="search">
+      </form>
+
+
+<!--result Table-->
+<div class="container table-responsive">
+    <table class="table">
+        <tbody> 
+         <!--  <tr>
+                <th>id</th>
+                <th>LeagueName</th>
+                <th>Nationality</th>
+          </tr>-->
+        {% for item in items %} 
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.Nationality}}</td>
+                <td>{{item.a4}}</td>
+                <td>{{item.a5}}</td>
+                <td>{{item.a6}}</td>
+                <td>{{item.a7}}</td>
+                <td>{{item.a8}}</td>
+                <td>{{item.a9}}</td>
+                <td>{{item.a10}}</td>
+                <td>{{item.a11}}</td>
+                <td>{{item.a12}}</td>
+                <td>{{item.a13}}</td>
+                <td>{{item.a14}}</td>
+                <td>{{item.a15}}</td>
+                <td>{{item.a16}}</td>
+                <td>{{item.a17}}</td>
+                <td>{{item.a18}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+ 
+    <div class="container">    
+        
+        <!-- Button trigger modal -->
+        <div style="text-align: right;">
+        <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#task-modal" data-source="New Comment">Add Comment</button>
+        </div>
+
+        
+        <div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Label">Add a comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="task-form-display">Comment</span>
+                    <input type="text" class="form-control" placeholder="Write Your Comment Here" aria-label="task-name" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="submit-task" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+<!--comment Table-->
+    <div class="container table-responsive">          
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="task-id">#</th>
+                <th class="task">comment</th>
+                <th class="update">Edit</th>
+                <th class="update">Remove</th>
+            </tr>
+            </thead>
+    
+            <tbody>
+            {% for cm in cms %}
+                <tr>
+                    <td>{{cm.id}}</td>
+                    <td>{{cm.task}}</td>
+                        
+                    <td><button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#task-modal" data-source="{{cm.id}}" data-content="{{cm.task}}"><i class="fa fa-pen fa-1" aria-hidden="true"></i></button></td>
+    
+                    <td><button class="btn btn-outline-secondary btn-sm remove" data-source="{{cm.id}}" type="button"><i class="fa fa-trash fa-1" aria-hidden="true"></i></button></td>
+                </tr>
+            {% endfor %}
+            
+            </tbody>
+        </table>
+    </div>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
+
+
+<footer class="footer">
+      <div class="container">
+            <p class="text-muted"><small>App developed for CS411 UIUC by @Liella!-80</small></p>
+      </div>
+    </footer>
+  </body>
+
+    
+    
+</html>

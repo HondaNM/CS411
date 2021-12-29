@@ -1,0 +1,20 @@
+runtime: python39
+
+instance_class: F1
+
+env_variables:
+    MYSQL_USER: 'wzm'
+    MYSQL_PASSWORD: 'wzm'
+    MYSQL_DB: 'FIFA21'
+    MYSQL_HOST: '35.222.64.191'
+
+handlers:
+# Matches requests to /images/... to files in static/images/...
+- url: /img
+  static_dir: static/img
+
+- url: /script
+  static_dir: static/script
+
+- url: /styles
+  static_dir: static/styles
